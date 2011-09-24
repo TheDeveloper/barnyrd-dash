@@ -11,10 +11,17 @@ var pusher_conf
     }
   ;
 
+var mongo = 
+  { endpoint : 'dbh15.mongolab.com:27157/barnyrd-dash'
+  , username : 'barnyrd-dash'
+  , password : 'barnyrd-m00'
+  };
+
 try { pusher_conf = require('./pusher'); }
 catch(e) { pusher_conf = defaults; }
 
 module.exports = 
   { pusher : pusher_conf
   , www    : http_conf
+  , mongo    : mongo
   };
