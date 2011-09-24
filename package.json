@@ -11,6 +11,7 @@
 , "dependencies": 
   { "pusher-pipe": "0.0.x"
   , "express" : "2.4.x"
+  , "mongoose" : "2.2.x"
   }
 , "devDependencies": {}
 }
