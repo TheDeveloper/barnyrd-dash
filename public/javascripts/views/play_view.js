@@ -15,7 +15,7 @@ var PlayView = function(sprites){
 				sprites[i].position.x + (spriteWidth/2),
 				((laneHeight * sprites[i].lane) + (laneHeight/2) + sprites[i].position.y) 
 			);
-			ctx.rotate(Math.sin(frameNum) * 0.3)
+			ctx.rotate(Math.sin(frameNum + sprites[i].lane ) * 0.3)
 			ctx.drawImage(
 				imgSprite, 
 				-spriteWidth/2,

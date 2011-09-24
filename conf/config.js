@@ -1,20 +1,20 @@
 // Allow us to have a hot-swappable pusher config so we can test individually
-var defaultPusherConf = {
-  app_id = '44',
-  key = '0458be1972bc459c659f',
-  secret = 'e009ed4001f474071a67'
-}
+var pusher_conf
+  , defaults = 
+    { app_id : '44'
+    , key    : '0458be1972bc459c659f'
+    , secret : 'e009ed4001f474071a67'
+    }
+  , http_conf =
+    { host: 'localhost'
+    , port: 8080
+    }
+  ;
 
-try{
-  var pusherConf = require('pusher');
-}
-catch(e){
-  pusherConf = defaultPusherConf;
-}
+try { pusher_conf = require('./pusher'); }
+catch(e) { pusher_conf = defaults; }
 
-var config = {
-  /** Pusher config **/
-  pusher : pusherConf
-}
-
-module.exports = config;
+module.exports = 
+  { pusher : pusher_conf
+  , www    : http_conf
+  };

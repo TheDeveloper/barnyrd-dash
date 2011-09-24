@@ -3,6 +3,11 @@
 	padding: 0;
 	margin: 0;
 }
+a {
+	text-decoration: none;
+	color: #222;
+}
+
 .notice {
 	position: absolute;
 	background: #ddd;
