@@ -1,0 +1,18 @@
+{
+  "author": "The Barnyrd Dash Team <geoff@gosquared.com>",
+  "name": "barnyrd-dash",
+  "description": "Bet on barnyard animal races",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TheDeveloper/barnyrd-dash.git"
+  },
+  "engines": {
+    "node": "~v0.4.8"
+  },
+  "dependencies": {
+    "pusher-pipe": "0.0.6",
+    "express" : "2.4.6"
+  },
+  "devDependencies": {}
+}
