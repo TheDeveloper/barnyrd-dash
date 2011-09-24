@@ -1,8 +1,31 @@
 <html>
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="javascripts/sprites/sprite.js" type="text/javascript"></script>	
 	<script src="javascripts/game.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" href="stylesheets/master.css" type="text/css" media="screen">
 </head>
 <body>
-	<canvas id="race" width="500" height="300"></canvas>
+	<div class="holder">
+	<h1>Barnyrd dash</h1>
+	<div class="gameArea">
+		
+	</div>
+	</div>
+	
+	<div id="templates">
+		<img src="images/characters/horse_01_48x48.png" id="imgSprite">
+		
+		<div class="raceScreen">
+			<div class="sky"></div>
+			<canvas id="race" width="800" height="300"></canvas>
+		</div>
+		
+		<div class="lobbyScreen">
+			<a href="#" class="startBtn">start race</a>
+		</div>
+		
+	</div>
 </body>
 </html>

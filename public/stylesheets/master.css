@@ -1,0 +1,32 @@
+* {
+	font-family: Arial;
+	padding: 0;
+	margin: 0;
+}
+.notice {
+	position: absolute;
+	background: #ddd;
+	width: 400px;
+	height: 100px;
+	padding: 20px;
+	left: 200px;
+	top: 100px;
+	text-align: center;
+	font-size: 2em;
+}
+#race {
+	background: #7ADE5F;
+}
+#templates {
+	display: none;
+}
+.sky {
+	background: #9FEFFF;
+	height: 100px;
+}
+.holder {
+	width: 800px;
+	margin: 0 auto;
+	background: #ddd;
+	position: relative;
+}
