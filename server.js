@@ -4,6 +4,13 @@ var express    = require('express')
   , app        = express.createServer()
   ;
 
+app.configure( function(){
+  app.use(express.bodyParser());
+  app.use(app.router);
+  app.use(express.static(__dirname + '/public'));
+});
+
+// request.body for 
 app.get('/', handler.helloWorld);
 
 app.listen(cfg.www.port, function(err) {
