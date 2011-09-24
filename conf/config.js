@@ -16,3 +16,5 @@ var config = {
   /** Pusher config **/
   pusher : pusherConf
 }
+
+module.exports = config;
