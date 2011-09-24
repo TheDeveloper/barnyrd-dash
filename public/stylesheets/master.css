@@ -7,7 +7,9 @@ a {
 	text-decoration: none;
 	color: #222;
 }
-
+.raceScreen {
+	background: #7ADE5F;
+}
 .notice {
 	position: absolute;
 	background: #ddd;
@@ -20,7 +22,9 @@ a {
 	font-size: 2em;
 }
 #race {
-	background: #7ADE5F;
+	margin-left: 70px;
+	margin-bottom: 30px;
+	margin-top: 20px;
 }
 #templates {
 	display: none;
@@ -34,10 +38,11 @@ a {
 	height: 100px;
 }
 .barn {
-	height: 300px;
-	width: 40px;
-	background: yellow;
+	top: 120px;
+	height: 360px;
+	width: 75px;
 	position: absolute;
+	background-image: url("../images/barn_01_75x360.png");
 }
 .holder {
 	width: 800px;
