@@ -26,8 +26,18 @@ a {
 	display: none;
 }
 .sky {
-	background: #9FEFFF;
+	background-image: url("../images/background_sky_01_800x100.png");
 	height: 100px;
+}
+.fields {
+	background-image: url("../images/background_fields_01_800x100.png");
+	height: 100px;
+}
+.barn {
+	height: 300px;
+	width: 40px;
+	background: yellow;
+	position: absolute;
 }
 .holder {
 	width: 800px;
