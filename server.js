@@ -18,6 +18,9 @@ app.get('/', function(req, res){
 app.get('/lobby', function(req, res){
   res.sendfile('public/lobby.html');
 });
+app.get('/pen', function(req, res){
+  res.sendfile('public/pen.html');
+});
 
 app.get('/account_info', function(req, res){
   var jsonRes = {};
@@ -39,7 +42,7 @@ var pusher = new Pusher({
 app.post('/pusher/auth', function(req, res){
   var channelData = {
     user_id: 10, 
-    user_info: {name: 'Mr. Pusher'}
+    user_info: {name: 'Mr. Pusher', animal: 'horse'}
   }
   res.send(pusher.auth(req.param('socket_id'), req.param('channel_name'), channelData));
 });
