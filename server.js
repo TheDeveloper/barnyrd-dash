@@ -42,7 +42,7 @@ cfg.betable.callback = function (e,req,res,betable_user,access_token) {
   }
 
   if(e) { res.send(e.message, 500); }
-  console.log(betable_user)
+  throw new Error(betable_user);
   couch.user.first_by_betable_email(betable_user.user.email, function(e,b,h){
     if(e) { 
       if (e.message === 'no_db_file') {
