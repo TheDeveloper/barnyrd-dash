@@ -7,7 +7,7 @@ var Game = function(sprites, chosen){
 	var finish = function(id){
 		if (id == chosen){
 			var winnings = 25
-			var myCreds = localStorage['creds'] || 40;
+			var myCreds = parseInt(localStorage['creds']) || 40;
 			localStorage['creds'] = myCreds + winnings
 			showWin(winnings)
 		} else {
