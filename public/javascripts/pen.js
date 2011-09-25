@@ -159,12 +159,15 @@ function initPen(){
     }if (input.right){
       pos.left = pos.left + speed
       moved = true
-    }if (input.up && (pos.top-last_top!==48)){
+    }if (input.up){
       pos.top = pos.top - speed
       moved = true
-    }if (input.down && (pos.top-last_top!==48)){
+    }if (input.down){
       pos.top = pos.top + speed
       moved = true
+    }
+    if(pos.top-last_top===48) {
+      pos.top = last_top;
     }
     if (moved == true) {
       last_top = pos.top;
