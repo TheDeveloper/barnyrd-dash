@@ -7,7 +7,7 @@ var Game = function(sprites, chosen){
 	var finish = function(id){
 		if (id == chosen){
 			var winnings = 25
-			var myCreds = localStorage['creds'] || 40;
+			var myCreds = parseInt(localStorage['creds']) || 40;
 			localStorage['creds'] = myCreds + winnings
 			showWin(winnings)
 		} else {
@@ -100,7 +100,7 @@ var showWin = function(money){
 
 var showLose = function(){
 	$('.notice').remove()
-	var el = $('<div class="notice">'+ '<img src="images/lose.png" />' + '</div>')
+	var el = $('<div class="notice"><br/><br/>'+ '<img src="images/text_loser_300x100.png" />' + '</div>')
 	$('.gameArea').append(el);
 	el.click(function(){ window.location = '/pen' })
 }

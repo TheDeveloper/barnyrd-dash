@@ -6,7 +6,7 @@ var LobbyScreen = function(contestants){
 	this.template.find('.startBtn').click( function(){
 		if (currentID){
 			self.template.remove();
-			contestants[currentID].maxSpeed = 6;
+			// contestants[currentID].maxSpeed;
 			new Game(contestants, currentID)
 		}
 		return false;

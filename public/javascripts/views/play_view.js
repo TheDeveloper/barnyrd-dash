@@ -21,7 +21,8 @@ var PlayView = function(sprites, chosen){
 	this.render = function(frameNum){
 		ctx.clearRect(0,0, canvas.width, canvas.height)		
 		for (var i=0; i < sprites.length; i++) {
-			$('#l'+i).css('left', (sprites[i].position.x - 240) + 'px')
+			var width = $('#l'+i).width()
+			$('#l'+i).css('left', (sprites[i].position.x - width - 50) + 'px')
 			$('#l'+i).css('top', ((laneHeight * sprites[i].lane) + spriteHeight -2) - 20);
 			if (i == chosen)
 				$('#l'+i).css('color', 'red');
