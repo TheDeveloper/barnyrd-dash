@@ -103,4 +103,6 @@ div#plane{
     background: url('/images/button_02_200x50.png') no-repeat;
     width: 200px;
     height: 50px;
+    border: 0;
+    cursor: pointer;
 }
