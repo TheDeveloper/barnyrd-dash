@@ -7,16 +7,6 @@ var express    = require('express')
   , couch      = require('./lib/couch')
   ;
 
-cfg.betable.callback = function (e,req,res,b) {
-  if(e) { res.send(e.message, 500); }
-  couch.user.first_by_betable_email(b.email, function(e,b,h){
-    if(e) { res.send('not found'); }
-    req.session.authenticated = true;
-    res.send(b);
-  });
-};
-betable(app,cfg);
-
 app.configure( function(){
   app.use(express.bodyParser());
   app.use(app.router);
@@ -24,6 +14,34 @@ app.configure( function(){
   app.use(express.session({ secret: www.secret }));
   app.use(express.static(__dirname + '/public'));
 });
+betable(app,cfg);
+
+cfg.betable.callback = function (e,req,res,betable_user,access_token) {
+  function render_user(user){
+    res.send(user);
+  }
+  
+  function render_err(e) {
+    res.send(e);
+  }
+  if(e) { res.send(e.message, 500); }
+  couch.user.first_by_betable_email(betable_user.user.email, function(e,b,h){
+    if(e) { 
+      if (e.message === 'no_db_file') {
+        return couch.user.create({betable: betable_user}, 0, function(e,couch_user) { 
+          if(e) { return render_err(e); }
+          render_user(couch_user); 
+        });
+      }
+      else {
+        return render_err(e);
+      }
+    }
+    //req.session.authenticated       = true;
+    //req.session._barnyrd_oath_token = access_token;
+    render_user(b);
+  });
+};
 
 app.get('/', function(req, res){
   res.sendfile('public/splash.html');
