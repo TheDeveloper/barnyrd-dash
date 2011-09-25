@@ -20,7 +20,7 @@ var Game = function(sprites){
 			
 			for (var i=0; i < sprites.length; i++) {
 				sprites[i].onEnterFrame(frameNum);
-				if (sprites[i].position.x > 700){
+				if (sprites[i].position.x > 650){
 					finish();
 				}
 			};
