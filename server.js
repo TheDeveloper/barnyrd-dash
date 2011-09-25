@@ -27,6 +27,25 @@ app.get('/account_info', function(req, res){
   res.send(JSON.stringify(jsonRes));
 });
 
+// Pusher auth
+
+var Pusher = require('./node-pusher');
+var pusher = new Pusher({
+  appId: '8771',
+  key: 'a553813b71932b8355e4',
+  secret: '029614202093c5ccba8d'
+});
+
+app.post('/pusher/auth', function(req, res){
+  var channelData = {
+    user_id: 10, 
+    user_info: {name: 'Mr. Pusher'}
+  }
+  res.send(pusher.auth(req.param('socket_id'), req.param('channel_name'), channelData));
+});
+
+// Server
+
 app.listen(cfg.port, function(err) {
   if (err) { throw err; }
   console.log( '{"www": "ok", "host": "%s", "port": "%d", "env": "%s"}', 
