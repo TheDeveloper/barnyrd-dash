@@ -1,0 +1,10 @@
+{ "name"            : "betable-oauth"
+, "description"     : "OAuth with the betable API"
+, "homepage"        : "http://github.com/dscape/node-betable-oauth"
+, "repository"      : "git://github.com/dscape/node-betable-oauth"
+, "version"         : "0.0.1"
+, "author"          : "Nuno Job <nunojobpinto@gmail.com> (http://nunojob.com)"
+, "keywords"        : ["nodejs", "oauth", "betable", "betable.com"]
+, "dependencies"    : {"oauth": "0.9.x"}
+, "main"            : "./index.js"
+}
