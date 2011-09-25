@@ -1,90 +1,101 @@
-var express    = require('express')
-  , cfg        = require('./conf/config')
-  , www        = cfg.www
-  , handler    = require('./handler')
-  , betable    = require('./lib/oauth2/betable')
-  , app        = express.createServer()
-  , mongoose   = require('mongoose')
-  , mongo      = require('mongodb')
-  , couch      = require('./lib/couch')
+var express       = require('express')
+  , cfg           = require('./conf/config')
+  , www           = cfg.www
+  , handler       = require('./handler')
+  , betable       = require('./lib/oauth2/betable')
+  , app           = express.createServer()
+  , couch         = require('./lib/couch')
+  , _             = require('underscore')
+  , authenticated = require('./lib/middleware/authenticated')
+  , character     = require('./lib/middleware/character')
   ;
 
 app.configure( function(){
+  app.use(express.methodOverride());
   app.use(express.bodyParser());
-  app.use(app.router);
   app.use(express.cookieParser());
   app.use(express.session({ secret: www.secret }));
+  app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  app.dynamicHelpers({
+    session: function(req, res){
+      return req.session;
+    }
+  });
 });
-betable(app,cfg);
 
 cfg.betable.callback = function (e,req,res,betable_user,access_token) {
   function render_user(user){
-    res.send(user);
+    req.session._barnyrd_authenticated = true;
+    req.session._barnyrd_oath_token    = access_token;
+    req.session._barnyrd_email         = user.betable.user.email;
+    req.session._barnyrd_user          = user;
+    res.redirect('/lobby');
   }
   
   function render_err(e) {
     res.send(e);
   }
+
   if(e) { res.send(e.message, 500); }
   couch.user.first_by_betable_email(betable_user.user.email, function(e,b,h){
     if(e) { 
       if (e.message === 'no_db_file') {
         return couch.user.create({betable: betable_user}, 0, function(e,couch_user) { 
           if(e) { return render_err(e); }
-          render_user(couch_user); 
+          delete couch_user.ok;
+          render_user(_.extend(couch_user, {betable: betable_user})); 
         });
       }
       else {
         return render_err(e);
       }
     }
-    //req.session.authenticated       = true;
-    //req.session._barnyrd_oath_token = access_token;
     render_user(b);
   });
 };
 
-app.get('/', function(req, res){
+app.get('/', function(req, res) {
+  if(req.session._barnyrd_oath_token) {
+    return res.redirect('/lobby');
+  }
   res.sendfile('public/splash.html');
 });
-app.get('/lobby', function(req, res){
+app.get('/lobby', authenticated, function(req, res){
   res.sendfile('public/lobby.html');
 });
-app.get('/pen', function(req, res){
+app.get('/pen',  authenticated, function(req, res){
   res.sendfile('public/pen.html');
 });
-app.get('/race', function(req, res){
+app.get('/race',  [authenticated, character], function(req, res){
   res.sendfile('public/race.html');
 });
+app.get('/logout', function(req,res){
+  req.session._barnyrd_authenticated =
+  req.session._barnyrd_oath_token    = 
+  req.session._barnyrd_email         = 
+  req.session._barnyrd_user          = 
+  req.session._barnyrd_animal        = null;
+  res.redirect('/');
+});
 
-app.get('/account_info', function(req, res){
-  var jsonRes = {};
-  if(req.session && req.session.authenticated){
-    
-  }
-  var server = new mongo.Server(cfg.mongo.host, cfg.mongo.port, {});
-    var client = new mongo.Db(cfg.mongo.database, server, {native_parser: true});
-    jsonRes.accountCreated = true;
-    client.open(function(err, db){
-	if(err){
-	    console.log(err);
-	}
-	db.authenticate(cfg.mongo.username, cfg.mongo.password, function(err, success){
-	    console.log(err);
-	    db.collection('test', function(err, collection){
-		console.log(err);
-	       collection.insert({'test' : 1}); 
-	    });
-	});
-    });
-  res.send(JSON.stringify(jsonRes));
+app.get('/account_info', authenticated, function(req, res){
+  res.send(JSON.stringify(req.session._barnyrd_user));
 });
 
 app.post('/create_player', function(req, res){
-  var playerName = req.param('name');
-  var character = req.param('character');
-  console.log(playerName);
+  var playerName = req.param('name')
+    , character  = req.param('character')
+    , user       = req.session._barnyrd_user
+    ;
+  user.playerName = playerName;
+  user.character  = character;
+  couch.user.update(user._id, user, function (e,b,h){
+    if(e) { res.send("error"); }
+    req.session._barnyrd_user   = b;
+    req.session._barnyrd_animal = character;
+    res.redirect('race');
+  });
 });
 
 // Pusher auth
@@ -108,6 +119,7 @@ app.post('/pusher/auth', function(req, res){
 
 app.listen(www.port, function(err) {
   if (err) { throw err; }
+  betable(app,cfg);
   console.log( '{"www": "ok", "host": "%s", "port": "%d", "env": "%s"}', 
     www.host, www.port, app.settings.env);
 });
