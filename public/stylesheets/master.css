@@ -24,6 +24,11 @@ a {
 	font-size: 2em;
 	background: url("../images/bg_sign_01_380x240.png");
 }
+.frameTop { position: absolute; left: -50px; top: -58px; width: 860px; height: 70px; background: yellow; background: url('../images/frame_top_860x70.png')}
+.frameBottom {position: absolute; background: yellow; width: 860px; left: -50; bottom: -52px; height: 70px; background: url('../images/frame_bottom_860x70.png')}
+.frameLeft {position: absolute; background: yellow; left: -50; width: 60px; top: 5px; height: 440px; background: url('../images/frame_left_60x440.png')}
+.frameRight {position: absolute; background: yellow; width: 60px; right: -50px; top: 5px; height: 440px; background: url('../images/frame_right_60x440.png')}
+	
 #templates {
 	display: none;
 }
