@@ -89,6 +89,7 @@ Pusher.prototype = {
         if (err) {
           channel.emit('subscription_error', data);
         } else {
+          self.channels.find(channel_name).dispatch_with_all('pusher:damien_send_subscribe', data.channel_data);
           self.send_event('pusher:subscribe', {
             channel: channel_name,
             auth: data.auth,
