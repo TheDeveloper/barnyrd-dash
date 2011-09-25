@@ -49,13 +49,17 @@ table {
 
 /** END RESET CSS **/
 
+body{
+  overflow: hidden;
+}
+
 div#wrapper{
   text-align: center;
 }
 
 div#splash-box, div#lobby-box{
   margin: 0 auto;
-  width: 500px;
+  width: 760px;
   height: 500px;
   background-color: green;
 }
@@ -96,4 +100,14 @@ div#plane{
   height: 128px;
   background: url('/images/logoplane.png');
   position: absolute;
+}
+
+div#overlay{
+  position: absolute;
+  width: 760px;
+  height: 500px;
+  background: #000;
+  opacity: 0.8;
+  display: none;
+  z-index: 1;
 }
