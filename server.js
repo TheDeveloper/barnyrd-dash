@@ -83,7 +83,7 @@ app.get('/account_info', authenticated, function(req, res){
   res.send(JSON.stringify(req.session._barnyrd_user));
 });
 
-app.post('/create_player', function(req, res){
+app.put('/create_player', function(req, res){
   var playerName = req.param('name')
     , character  = req.param('character')
     , user       = req.session._barnyrd_user
@@ -94,7 +94,7 @@ app.post('/create_player', function(req, res){
     if(e) { res.send("error"); }
     req.session._barnyrd_user   = b;
     req.session._barnyrd_animal = character;
-    res.redirect('race');
+    res.send(b);
   });
 });
 

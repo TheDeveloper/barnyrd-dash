@@ -53,12 +53,12 @@ function initLobby(){
           // Post off the info and create the player
            $.ajax({
               url: '/create_player',
-              type: 'POST',
+              type: 'PUT',
               dataType: 'json',
               error: ajaxFail,
               data: {name: playerName, character: character},
               success: function(res, t, XHR){
-                  
+                window.location = '/pen';
               }
           });
         });
