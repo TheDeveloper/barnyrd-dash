@@ -7,6 +7,7 @@ var pusher  =
   , www     =
     { host   : 'localhost'
     , port   : 8080
+    , ssl   : false
     , secret : 'f095ad69066a9e8bc312acebf84cc4e7004c6e7695389558b2177c664e1' +
                '8b4ed490fda8665d5fca9d364597977399a1069bf88612b921f1308b45a'
     }
