@@ -42,7 +42,6 @@ var Game = function(sprites){
 		}
 	}
 	
-	playView.drawTracks()
 	countDown(4)
 }
 

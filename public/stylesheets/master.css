@@ -109,3 +109,8 @@ a {
 .card strong{
 	padding-top: 50px;
 }
+.label {
+	position: absolute;
+	width: 200px;
+	text-align: right;
+}
