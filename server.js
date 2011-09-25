@@ -41,22 +41,30 @@ cfg.betable.callback = function (e,req,res,betable_user,access_token) {
     res.send(e);
   }
 
+  function create_user(user) {
+    user = user ? {betable: user} : {betable: {}};
+    couch.user.create(user, 0, function(e,couch_user) { 
+      if(e) { return render_err(e); }
+      delete couch_user.ok;
+      render_user(_.extend(couch_user, user)); 
+    });
+  }
+
   if(e) { res.send(e.message, 500); }
-  couch.user.first_by_betable_email(betable_user.user.email, function(e,b,h){
-    if(e) { 
-      if (e.message === 'no_db_file') {
-        return couch.user.create({betable: betable_user}, 0, function(e,couch_user) { 
-          if(e) { return render_err(e); }
-          delete couch_user.ok;
-          render_user(_.extend(couch_user, {betable: betable_user})); 
-        });
+  if(betable_user.user) {
+    couch.user.first_by_betable_email(betable_user.user.email, function(e,b,h){
+      if(e) { 
+        if (e.message === 'no_db_file') {
+          return create_user(betable_user)
+        }
+        else {
+          return render_err(e);
+        }
       }
-      else {
-        return render_err(e);
-      }
-    }
-    render_user(b);
-  });
+      render_user(b);
+    });
+  } 
+  else { create_user(); }
 };
 
 app.get('/', function(req, res) {
