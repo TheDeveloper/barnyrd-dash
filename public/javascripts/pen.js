@@ -61,8 +61,13 @@ function initPen(){
     if (data.key == 'BACKSPACE') {
       member.chatElm.find('span').last().remove();
     } else {
+    console.log(data.key)
       if (data.key == ' ') {data.key = "&nbsp;"}
-      member.chatElm.append('<span>'+data.key+'</span>');
+      if (data.key == 'ENTER') {
+        member.chatElm.append('<br/><span>&nbsp;</span>');
+      } else {
+        member.chatElm.append('<span>'+data.key+'</span>');
+      }
       member.chatElm.scrollTop(3000);
     }
   }
@@ -92,7 +97,10 @@ function initPen(){
   $('body').keydown(function (evt) {
     if (evt.keyCode == 8) {
       sendKey('BACKSPACE');
-      console.log('BACKSPACE');
+      return false;
+    }
+    if (evt.keyCode == 13) {
+      sendKey('ENTER');
       return false;
     }
   });
