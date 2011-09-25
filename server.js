@@ -23,7 +23,7 @@ app.configure( function(){
   app.use(express.bodyParser());
   app.use(app.router);
   app.use(express.cookieParser());
-  app.use(express.session({ secret: cfg.www.secret }));
+  app.use(express.session({ secret: www.secret }));
   app.use(express.static(__dirname + '/public'));
 });
 
@@ -88,10 +88,10 @@ app.post('/pusher/auth', function(req, res){
 
 // Server
 
-app.listen(cfg.www.port, function(err) {
+app.listen(www.port, function(err) {
   if (err) { throw err; }
   console.log( '{"www": "ok", "host": "%s", "port": "%d", "env": "%s"}', 
-    cfg.www.host, cfg.www.port, app.settings.env);
+    www.host, www.port, app.settings.env);
 });
 
 process.on('uncaughtException', function(err) {
