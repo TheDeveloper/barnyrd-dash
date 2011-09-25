@@ -1,18 +1,35 @@
+#pen {
+	width: 760px;
+	height: 460px;
+	background: url(/images/background_welcome_760x460.png) top left no-repeat;
+}
 .player {
 	display: block;
 	position: fixed;
-	width: 30px;
-	height: 30px;
-	background: red;
-	top: 100px;
+	top: 220px;
 	left: 50px;
 }
+.sprite {
+	display: block;
+	position: fixed;
+	width: 48px;
+	height: 48px;
+	background: url(/images/characters/cow_01_48x48.png) top left no-repeat;
+}
 .chat {
+	opacity: 0.7;
+	font-family: arial;
+	font-size: 12px;
 	display: block;
 	position: relative;
+	background: white;
 	width: 150px;
-	height: 20px;
+	height: 30px;
 	border: 1px solid #ccc;
-	top: 0px;
-	left: 40px;
+	top: -10px;
+	left: 0px;
+	overflow: scroll;
+}
+.chat span {
+	float: left;
 }

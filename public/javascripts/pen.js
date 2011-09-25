@@ -35,7 +35,7 @@ function initPen(){
 
   function addMember(id, info) {
     members[id] = info;
-    pen.append('<div class="player" style="left:'+id*4+'px" id="player-'+id+'"><div class="chat" style="" id="chat-'+id+'"></div><div class="sprite '+info.animal+'"></div></div>')
+    pen.append('<div class="player" style="left:'+id*4+'px" id="player-'+id+'"><div class="chat" style="" id="chat-'+id+'"></div><div class="sprite '+info.animal+'" style="background: url(/images/characters/'+info.animal+'_01_48x48.png) top left no-repeat;"></div></div>')
   }
 
   function removeMember (id, info) {
@@ -49,13 +49,11 @@ function initPen(){
     // console.log("RCVD:"+data.key);
     var elm = $('#chat-'+data.user_id);
     if (data.key == 'BACKSPACE') {
-      var myStr = elm.html();
-      myStr.substring(0,myStr.length-1);
-
-    // console.log("RCVD:"+data.key);
-      elm.html(myStr.substring(0,myStr.length-1));
+      elm.find('span').last().remove();
     } else {
-      elm.append(data.key);
+      if (data.key == ' ') {data.key = "&nbsp;"}
+      elm.append('<span>'+data.key+'</span>');
+      elm.scrollTop(300);
     }
   }
 
