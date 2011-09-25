@@ -19,7 +19,7 @@ app.get('/lobby', function(req, res){
   res.sendfile('public/lobby.html');
 });
 
-app.get('/accountInfo', function(req, res){
+app.get('/account_info', function(req, res){
   var jsonRes = {};
   if(req.session && req.session.authenticated){
     jsonRes.accountCreated = true;

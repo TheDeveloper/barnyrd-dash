@@ -64,8 +64,11 @@ div#splash-box, div#lobby-box{
   background-color: green;
 }
 
+.clear{
+  clear:both;
+}
+
 .button{
-  margin-top: 80%;
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
 	box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -110,4 +113,8 @@ div#overlay{
   opacity: 0.8;
   display: none;
   z-index: 1;
+}
+
+.error-dialog{
+  position: absolute;
 }
