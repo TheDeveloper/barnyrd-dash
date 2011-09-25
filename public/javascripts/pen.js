@@ -168,10 +168,10 @@ function initPen(){
     }
     if(pos.top-last_top===48) {
       pos.top = last_top;
-    } else (pos.top-last_top===49 || (pos.top-last_top===47) {
+    } else if ((pos.top-last_top===49) || (pos.top-last_top===47)) {
       pos.top = pos.top-48;
     }
-    if (moved == true) {
+    if (moved === true) {
       last_top = pos.top;
       penChan.trigger('client-pos', {
         user_id: myInfo.user_id,
