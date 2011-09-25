@@ -8,23 +8,17 @@ a {
 	color: #222;
 }
 .raceScreen {
-	background: #7ADE5F;
+	background: #65CA39;
+	height: 450px;
 }
 .notice {
 	position: absolute;
-	background: #ddd;
 	width: 400px;
 	height: 100px;
-	padding: 20px;
 	left: 200px;
 	top: 100px;
 	text-align: center;
 	font-size: 2em;
-}
-#race {
-	margin-left: 70px;
-	margin-bottom: 30px;
-	margin-top: 20px;
 }
 #templates {
 	display: none;
@@ -43,10 +37,16 @@ a {
 	width: 75px;
 	position: absolute;
 	background-image: url("../images/barn_01_75x360.png");
+	z-index: 10;
 }
 .holder {
 	width: 800px;
 	margin: 0 auto;
 	background: #ddd;
 	position: relative;
+}
+.raceCanvas {
+	position: absolute;
+	top: 150px;
+	left: 70px;
 }
