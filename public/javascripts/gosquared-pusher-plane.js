@@ -11,6 +11,6 @@ function doPlane(){
     plane.prependTo($('body'));
   }
   plane.css({left: $(window).width()});
-  plane.animate({left: -1*$(plane).width()}, 10000, 'linear', function(){setTimeout(doPlane, 5000)});
+  plane.stop().animate({left: -1*$(plane).width()}, 10000, 'linear', function(){setTimeout(doPlane, 5000)});
 }
 $(document).ready(doPlane);

@@ -11,6 +11,20 @@ app.configure( function(){
 });
 
 // request.body for 
+app.get('/', function(req, res){
+  res.sendfile('public/splash.html');
+});
+app.get('/lobby', function(req, res){
+  res.sendfile('public/lobby.html');
+});
+
+app.get('/accountInfo', function(req, res){
+  var jsonRes = {};
+  if(req.session && req.session.authenticated){
+    jsonRes.accountCreated = true;
+  }
+  res.send(JSON.stringify(jsonRes));
+});
 
 app.listen(cfg.www.port, function(err) {
   if (err) { throw err; }
