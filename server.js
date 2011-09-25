@@ -1,5 +1,6 @@
 var express    = require('express')
-  , www        = require('./conf/config').www
+  , cfg        = require('./conf/config')
+  , www        = cfg.www
   , handler    = require('./handler')
   , betable    = require('./lib/oauth2/betable')
   , app        = express.createServer()
@@ -14,6 +15,7 @@ cfg.betable.callback = function (e,req,res,b) {
     res.send(b);
   });
 };
+betable(app,cfg);
 
 app.configure( function(){
   app.use(express.bodyParser());
@@ -21,7 +23,6 @@ app.configure( function(){
   app.use(express.cookieParser());
   app.use(express.session({ secret: www.secret }));
   app.use(express.static(__dirname + '/public'));
-  app.use(betable(app,cfg));
 });
 
 app.get('/', function(req, res){
