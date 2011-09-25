@@ -1,11 +1,11 @@
 #pen {
 	width: 760px;
-	height: 460px;
+	height: 480px;
 	background: url(/images/background_welcome_760x460.png) top left no-repeat;
 }
 .player {
 	display: block;
-	position: fixed;
+	position: relative;
 	top: 220px;
 	left: 50px;
 }
