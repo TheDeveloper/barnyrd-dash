@@ -33,3 +33,10 @@
 .chat span {
 	float: left;
 }
+.startBtn {
+	position: absolute;
+	top: 120px;
+	left: 280px;
+	display: block;
+	width: 200px;
+}

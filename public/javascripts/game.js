@@ -2,19 +2,10 @@ var Game = function(sprites){
 	var gameInterval;
 	var self = this
 	var frameNum;
-	var sprites = [];
-	var playerLength = 7;
-	for (var i=0; i < playerLength; i++) {
-		sprites.push( new Sprite(i) )
-	};
 	var playView = new PlayView(sprites);
 	
 	var finish = function(){
 		showWin(25)
-		var btn = $('<a href="#">Play again</a>').click(function(){
-			new Game()
-		});
-		$('.notice').append(btn)
 		stop()
 	}
 	
@@ -98,6 +89,7 @@ var showWin = function(money){
 	$('.notice').remove()
 	var el = $('<div class="notice">'+ '<img src="images/signwin_01_380x240.png" />' + '</div>')
 	$('.gameArea').append(el);
+	el.click(function(){ window.location = '/pen' })
 }
 
 var showNotice = function(msg){

@@ -61,3 +61,44 @@ a {
 .counter3 { background-position: 0 -140 }
 .counter2 { background-position: 0 -280 }
 .counter1 { background-position: 0 -420 }
+.clear{
+  clear:both;
+}
+.lobbyScreen {
+	position: absolute;
+	top: 50px;
+	left: 100px;
+	z-index: 11;
+	background: #997956;
+	padding: 10px;
+	width: 600px;
+}
+.lobbyScreen h1 {
+	text-align: center;
+}
+.contestants li {
+	width: 150px;
+	float: left;
+	height: 100px;
+	text-align: center;
+}
+.contestants li.selected {
+	background: yellow;
+}
+.card{
+  /*border: solid 1px #000;*/
+	margin: 0 auto;
+  width: 48px;
+  height: 48px;
+  background-repeat: no-repeat;
+	background-image: url('../images/characters/characters_01_48x480.png');
+}
+.card.animal0 { background-position: 0 0px; }
+.card.animal1 { background-position: 0 -48px; }
+.card.animal2 { background-position: 0 -96px; }
+.card.animal3 { background-position: 0 -144px; }
+.card.animal4 { background-position: 0 -192px; }
+
+.card strong{
+	padding-top: 50px;
+}

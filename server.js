@@ -21,6 +21,9 @@ app.get('/lobby', function(req, res){
 app.get('/pen', function(req, res){
   res.sendfile('public/pen.html');
 });
+app.get('/race', function(req, res){
+  res.sendfile('public/race.html');
+});
 
 app.get('/account_info', function(req, res){
   var jsonRes = {};

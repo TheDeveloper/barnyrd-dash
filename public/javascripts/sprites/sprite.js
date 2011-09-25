@@ -7,6 +7,7 @@ var Sprite = function(lane){
 		y: 0
 	}
 	this.spriteIndex = Math.floor(Math.random() * 5);
+	this.name = generateStupidName()
 	
 	this.onEnterFrame = function(frameNum){
 		this.position.x += Math.random() * maxSpeed;
