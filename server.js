@@ -22,6 +22,10 @@ app.configure( function(){
       return req.session;
     }
   });
+  app.use(express.logger({ format: 
+    '{"date": ":date", "status": ":status", "method": ":method", ' +
+    '"url": ":url", "time": ":response-time", "agent": ":user-agent", ' +
+    '"http": ":http-version",  "referer": ":referrer"}' }));
 });
 
 cfg.betable.callback = function (e,req,res,betable_user,access_token) {
