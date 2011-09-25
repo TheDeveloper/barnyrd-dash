@@ -32,7 +32,7 @@ cfg.betable.callback = function (e,req,res,betable_user,access_token) {
   function render_user(user){
     req.session._barnyrd_authenticated = true;
     req.session._barnyrd_oath_token    = access_token;
-    req.session._barnyrd_email         = user.betable.user.email ? user.betable.user.email : 'fuuu';
+    req.session._barnyrd_email         = user.betable.user && user.betable.user.email ? user.betable.user.email : 'fuuu';
     req.session._barnyrd_user          = user;
     res.redirect('/lobby');
   }
