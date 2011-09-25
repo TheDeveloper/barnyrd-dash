@@ -1,15 +1,27 @@
 var express    = require('express')
-  , cfg        = require('./conf/config').www
+  , www        = require('./conf/config').www
   , handler    = require('./handler')
+  , betable    = require('./lib/oauth2/betable')
   , app        = express.createServer()
+  , couch      = require('./lib/couch')
   ;
+
+cfg.betable.callback = function (e,req,res,b) {
+  if(e) { res.send(e.message, 500); }
+  couch.user.first_by_betable_email(b.email, function(e,b,h){
+    if(e) { res.send('not found'); }
+    req.session.authenticated = true;
+    res.send(b);
+  });
+};
 
 app.configure( function(){
   app.use(express.bodyParser());
   app.use(app.router);
   app.use(express.cookieParser());
-  app.use(express.session({ secret: cfg.secret }));
+  app.use(express.session({ secret: www.secret }));
   app.use(express.static(__dirname + '/public'));
+  app.use(betable(app,cfg));
 });
 
 app.get('/', function(req, res){
@@ -46,16 +58,16 @@ app.post('/pusher/auth', function(req, res){
   var channelData = {
     user_id: Math.floor(Math.random()*100), 
     user_info: {name: 'Mr. Pusher', animal: 'horse'}
-  }
+  };
   res.send(pusher.auth(req.param('socket_id'), req.param('channel_name'), channelData));
 });
 
 // Server
 
-app.listen(cfg.port, function(err) {
+app.listen(www.port, function(err) {
   if (err) { throw err; }
   console.log( '{"www": "ok", "host": "%s", "port": "%d", "env": "%s"}', 
-    cfg.host, cfg.port, app.settings.env);
+    www.host, www.port, app.settings.env);
 });
 
 process.on('uncaughtException', function(err) {

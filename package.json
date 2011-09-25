@@ -12,6 +12,8 @@
   { "pusher-pipe": "0.0.x"
   , "express" : "2.4.x"
   , "mongoose" : "2.2.x"
+  , "nano" : "0.9.x"
+  , "request": "2.1.x"
   }
 , "devDependencies": {}
 }
