@@ -6,8 +6,6 @@
   { "type": "git"
   , "url": "git://github.com/TheDeveloper/barnyrd-dash.git"
   }
-, "engines": 
-  { "node": "~v0.4.8" }
 , "dependencies": 
   { "pusher-pipe": "0.0.x"
   , "express" : "2.4.x"
