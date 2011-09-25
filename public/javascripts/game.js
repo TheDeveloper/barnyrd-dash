@@ -100,7 +100,7 @@ var showWin = function(money){
 
 var showLose = function(){
 	$('.notice').remove()
-	var el = $('<div class="notice">'+ '<img src="images/lose.png" />' + '</div>')
+	var el = $('<div class="notice"><br/><br/>'+ '<img src="images/text_loser_300x100.png" />' + '</div>')
 	$('.gameArea').append(el);
 	el.click(function(){ window.location = '/pen' })
 }
