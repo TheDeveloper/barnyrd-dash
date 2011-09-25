@@ -109,8 +109,17 @@ a {
 .card strong{
 	padding-top: 50px;
 }
+.labelHolder {
+	position: absolute;
+	left: 70px;
+	top: 100px;
+	height: 360px;
+	width: 690px;
+	overflow: hidden;
+}
 .label {
 	position: absolute;
 	width: 200px;
+	left: -200px;
 	text-align: right;
 }

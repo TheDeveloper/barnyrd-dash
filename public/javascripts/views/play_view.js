@@ -14,15 +14,15 @@ var PlayView = function(sprites){
 	var labels = []
 	for (var i=0; i < sprites.length; i++) {
 		var el = $('<div class="label" id="l'+i+'">'+sprites[i].name+'</div>')
-		$('.raceScreen').append(el)
+		$('.labelHolder').append(el)
 		labels.push(el)
 	}
 	
 	this.render = function(frameNum){
 		ctx.clearRect(0,0, canvas.width, canvas.height)		
 		for (var i=0; i < sprites.length; i++) {
-			$('#l'+i).css('left', (sprites[i].position.x - 160) + 'px')
-			$('#l'+i).css('top', ((laneHeight * sprites[i].lane) + spriteHeight -2) + 80)
+			$('#l'+i).css('left', (sprites[i].position.x - 240) + 'px')
+			$('#l'+i).css('top', ((laneHeight * sprites[i].lane) + spriteHeight -2) - 20)
 			// draw shadow
 			ctx.drawImage(
 				shadowSprite, 
