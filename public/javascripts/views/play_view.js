@@ -1,4 +1,4 @@
-var PlayView = function(sprites){
+var PlayView = function(sprites, chosen){
 	var self = this;
 	var canvas	= document.getElementById('race');
 	var ctx			= canvas.getContext('2d');
@@ -22,7 +22,9 @@ var PlayView = function(sprites){
 		ctx.clearRect(0,0, canvas.width, canvas.height)		
 		for (var i=0; i < sprites.length; i++) {
 			$('#l'+i).css('left', (sprites[i].position.x - 240) + 'px')
-			$('#l'+i).css('top', ((laneHeight * sprites[i].lane) + spriteHeight -2) - 20)
+			$('#l'+i).css('top', ((laneHeight * sprites[i].lane) + spriteHeight -2) - 20);
+			if (i == chosen)
+				$('#l'+i).css('color', 'red');
 			// draw shadow
 			ctx.drawImage(
 				shadowSprite, 
