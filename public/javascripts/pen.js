@@ -29,13 +29,16 @@ function initPen(){
     removeMember(member.id);
   })
 
-  Pusher.log = function(message) {
-    if (window.console && window.console.log) window.console.log(message);
-  };
+  // Pusher.log = function(message) {
+  //   if (window.console && window.console.log) window.console.log(message);
+  // };
 
   function addMember(id, info) {
     members[id] = info;
-    pen.append('<div class="player" style="left:'+id*4+'px" id="player-'+id+'"><div class="chat" style="" id="chat-'+id+'"></div><div class="sprite '+info.animal+'" style="background: url(/images/characters/'+info.animal+'_01_48x48.png) top left no-repeat;"></div></div>')
+    pen.append('<div class="player" style="left:'+id*4+'px" id="player-'+id+'"><div class="chatbox"><div class="chat" style="" id="chat-'+id+'"></div><div class="chatarrow"></div></div><div class="sprite '+info.animal+'" style="background: url(/images/characters/'+info.animal+'_01_48x48.png) top left no-repeat;"></div></div>')
+    members[id].elm = $('#player-'+id);
+    members[id].chatElm = members[id].elm.find('.chat');
+    members[id].chatBoxElm = members[id].elm.find('.chatbox');
   }
 
   function removeMember (id, info) {
@@ -47,13 +50,20 @@ function initPen(){
   function rcvdKey(data) {
     // console.log("MID:"+data.user_id);
     // console.log("RCVD:"+data.key);
-    var elm = $('#chat-'+data.user_id);
+    member = members[data.user_id];
+
+    member.chatBoxElm.show();
+    if (member.chatTimeout) clearTimeout(member.chatTimeout);
+    member.chatTimeout = setTimeout(function() {
+      member.chatBoxElm.fadeOut();
+    }, 2000);
+  
     if (data.key == 'BACKSPACE') {
-      elm.find('span').last().remove();
+      member.chatElm.find('span').last().remove();
     } else {
       if (data.key == ' ') {data.key = "&nbsp;"}
-      elm.append('<span>'+data.key+'</span>');
-      elm.scrollTop(300);
+      member.chatElm.append('<span>'+data.key+'</span>');
+      member.chatElm.scrollTop(3000);
     }
   }
 
