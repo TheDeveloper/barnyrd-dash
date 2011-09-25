@@ -27,7 +27,7 @@ app.get('/account_info', function(req, res){
   res.send(JSON.stringify(jsonRes));
 });
 
-app.listen(cfg.www.port, function(err) {
+app.listen(cfg.port, function(err) {
   if (err) { throw err; }
   console.log( '{"www": "ok", "host": "%s", "port": "%d", "env": "%s"}', 
     cfg.host, cfg.port, app.settings.env);
