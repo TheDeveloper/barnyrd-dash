@@ -51,14 +51,15 @@ function initLobby(){
           var character = selectedAnimal.find('input').val();
 
           // Post off the info and create the player
-          $.post('/create_player', {name: playerName, character: character}, function(res, t, XHR){
-            if(XHR.status != 200){
-              console.log('Could not create player');
-              alert('Oops... something went wrong. Check your internet connection');
-              return false;
-            }
-
-            // Drop the player into the pen
+           $.ajax({
+              url: '/create_player',
+              type: 'POST',
+              dataType: 'json',
+              error: ajaxFail,
+              data: {name: playerName, character: character},
+              success: function(res, t, XHR){
+                  
+              }
           });
         });
 

@@ -1,14 +1,16 @@
 var express    = require('express')
-  , cfg        = require('./conf/config').www
+  , cfg        = require('./conf/config')
   , handler    = require('./handler')
   , app        = express.createServer()
+  , mongoose   = require('mongoose')
+  , mongo      = require('mongodb');
   ;
 
 app.configure( function(){
   app.use(express.bodyParser());
   app.use(app.router);
   app.use(express.cookieParser());
-  app.use(express.session({ secret: cfg.secret }));
+  app.use(express.session({ secret: cfg.www.secret }));
   app.use(express.static(__dirname + '/public'));
 });
 
@@ -25,9 +27,30 @@ app.get('/pen', function(req, res){
 app.get('/account_info', function(req, res){
   var jsonRes = {};
   if(req.session && req.session.authenticated){
-    jsonRes.accountCreated = true;
+    
   }
+  var server = new mongo.Server(cfg.mongo.host, cfg.mongo.port, {});
+    var client = new mongo.Db(cfg.mongo.database, server, {native_parser: true});
+    jsonRes.accountCreated = true;
+    client.open(function(err, db){
+	if(err){
+	    console.log(err);
+	}
+	db.authenticate(cfg.mongo.username, cfg.mongo.password, function(err, success){
+	    console.log(err);
+	    db.collection('test', function(err, collection){
+		console.log(err);
+	       collection.insert({'test' : 1}); 
+	    });
+	});
+    });
   res.send(JSON.stringify(jsonRes));
+});
+
+app.post('/create_player', function(req, res){
+  var playerName = req.param('name');
+  var character = req.param('character');
+  console.log(playerName);
 });
 
 // Pusher auth
@@ -49,10 +72,10 @@ app.post('/pusher/auth', function(req, res){
 
 // Server
 
-app.listen(cfg.port, function(err) {
+app.listen(cfg.www.port, function(err) {
   if (err) { throw err; }
   console.log( '{"www": "ok", "host": "%s", "port": "%d", "env": "%s"}', 
-    cfg.host, cfg.port, app.settings.env);
+    cfg.www.host, cfg.www.port, app.settings.env);
 });
 
 process.on('uncaughtException', function(err) {

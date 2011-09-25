@@ -21,8 +21,10 @@ var pusher_conf
   ;
 
 var mongo = 
-  { endpoint : 'dbh15.mongolab.com:27157/barnyrd-dash'
+  { host : 'dbh15.mongolab.com'
+  , port : 27157
   , username : 'barnyrd-dash'
+  , database : 'barnyrd-dash'
   , password : 'barnyrd-m00'
   };
 
