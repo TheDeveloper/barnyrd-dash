@@ -18,13 +18,13 @@ var PlayView = function(sprites){
 	
 	this.drawTracks = function(){
 		// draw tracks
-		for (var i=0; i < trackSprites.length; i++) {
-			ctx.drawImage(
-				trackSprites[i], 
-				10,
-				laneHeight * i + 20
-			);
-		};
+		// for (var i=0; i < trackSprites.length; i++) {
+		// 	ctx.drawImage(
+		// 		trackSprites[i], 
+		// 		10,
+		// 		laneHeight * i + 20
+		// 	);
+		// };
 	}
 	
 	this.render = function(frameNum){

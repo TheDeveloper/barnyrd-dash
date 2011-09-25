@@ -8,17 +8,18 @@ a {
 	color: #222;
 }
 .raceScreen {
-	background: #65CA39;
+	background: #65CA39 url("../images/tracks.png") no-repeat 20 125;
 	height: 450px;
 }
 .notice {
 	position: absolute;
-	width: 400px;
-	height: 100px;
+	width: 380px;
+	height: 240px;
 	left: 200px;
 	top: 100px;
 	text-align: center;
 	font-size: 2em;
+	background: url("../images/bg_sign_01_380x240.png");
 }
 #templates {
 	display: none;
@@ -32,7 +33,7 @@ a {
 	height: 100px;
 }
 .barn {
-	top: 120px;
+	top: 70px;
 	height: 360px;
 	width: 75px;
 	position: absolute;
@@ -41,12 +42,22 @@ a {
 }
 .holder {
 	width: 800px;
-	margin: 0 auto;
+	margin: 30px auto;
 	background: #ddd;
 	position: relative;
 }
 .raceCanvas {
 	position: absolute;
-	top: 150px;
+	top: 100px;
 	left: 70px;
 }
+.counter {
+	background-image: url("../images/countdown_140x560.png");
+	width: 140px;
+	height: 140px;
+	margin: 40px auto;
+}
+.counter4 { background-position: 0 0 }
+.counter3 { background-position: 0 -140 }
+.counter2 { background-position: 0 -280 }
+.counter1 { background-position: 0 -420 }
