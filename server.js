@@ -11,7 +11,6 @@ app.configure( function(){
 });
 
 // request.body for 
-app.get('/', handler.helloWorld);
 
 app.listen(cfg.www.port, function(err) {
   if (err) { throw err; }
