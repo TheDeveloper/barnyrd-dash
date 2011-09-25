@@ -171,7 +171,7 @@ function initPen(){
         left: pos.left,
         top: pos.top
       });
-      pos = {};
+      input = {};
       myInfo.elm.css({
         left: pos.left,
         top: pos.top
