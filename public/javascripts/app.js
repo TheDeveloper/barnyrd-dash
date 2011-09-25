@@ -17,7 +17,7 @@ $().ready(function(){
 	$.getJSON('/get_my_player', function(res){
 	    var cl = contestants.length-1;
 	    contestants[cl] = new Sprite(i);
-	    contestants[cl].name = res.name;
+	    contestants[cl].name = res.name + ' (You)';
 	    contestants[cl].spriteIndex = sprites[res.animal];
 	    var lobbyScreen = new LobbyScreen(contestants);
 	    $('.gameArea').append( lobbyScreen.template );
