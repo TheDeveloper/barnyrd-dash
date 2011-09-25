@@ -1,36 +1,67 @@
 function initPen(){
+  var myInfo = null;
   var members = [];
   var pen = $('#pen');
   var pusher = new Pusher('a553813b71932b8355e4');
-  var penChan = pusher.subscribe('presence-pen');
-  Pusher.log = function(message) {
-    if (window.console && window.console.log) window.console.log(message);
-  };
 
-  function add_member(id, info) {
-    members[id] = info;
-    pen.append('<div class="player" id="player-"'+id+'"></div>')
-  }
+
+  var penChan = pusher.subscribe('presence-pen');
+
+  penChan.bind('pusher:damien_send_subscribe', function(channel_data) {
+    console.log(channel_data)
+    myInfo = JSON.parse(channel_data);
+  })
 
   penChan.bind('pusher:subscription_succeeded', function(members) {
     // update_member_count(members.count);
     members.each(function(member) {
-      add_member(member.id, member.info);
+      addMember(member.id, member.info);
     });
   })
 
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) window.console.log(message);
+  };
+
+  function addMember(id, info) {
+    members[id] = info;
+    pen.append('<div class="player" style="left:'+id*4+'px" id="player-'+id+'"></div>')
+    pen.append('<div class="chat" style="left:'+id*4+'px" id="chat-'+id+'"></div>')
+  }
+
+  function rcvdKey(data) {
+    // console.log("MID:"+data.mid);
+    // console.log("RCVD:"+data.key);
+    var elm = $('#chat-'+data.mid);
+    if (data.key == 'BACKSPACE') {
+      var myStr = elm.html();
+      myStr.substring(0,myStr.length-1);
+
+    // console.log("RCVD:"+data.key);
+      elm.html(myStr.substring(0,myStr.length-1));
+    } else {
+      elm.append(data.key);
+    }
+  }
+
+  function sendKey (key) {
+    var data = {mid: myInfo.user_id, key:key};
+    penChan.trigger('client-key', data);
+    rcvdKey(data);
+  }
+
   penChan.bind('client-key', function(data) {
-    console.log("RCVD:"+data.v);
+    rcvdKey(data);
   });
 
   $('body').keypress(function (evt) { 
     // this.value = this.value.replace(/[^0-9\.]/g,'');
-    penChan.trigger('client-key', {v:String.fromCharCode(evt.which)});
+    sendKey(String.fromCharCode(evt.which));
     console.log(String.fromCharCode(evt.which));
   });
   $('body').keydown(function (evt) {
     if (evt.keyCode == 8) {
-      penChan.trigger('client-key', {v:'BACKSPACE'});
+      sendKey('BACKSPACE');
       console.log('BACKSPACE');
       return false;
     }

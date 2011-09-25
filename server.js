@@ -41,7 +41,7 @@ var pusher = new Pusher({
 
 app.post('/pusher/auth', function(req, res){
   var channelData = {
-    user_id: 10, 
+    user_id: Math.floor(Math.random()*100), 
     user_info: {name: 'Mr. Pusher', animal: 'horse'}
   }
   res.send(pusher.auth(req.param('socket_id'), req.param('channel_name'), channelData));

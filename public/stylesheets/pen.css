@@ -1,0 +1,18 @@
+.player {
+	display: block;
+	position: fixed;
+	width: 30px;
+	height: 30px;
+	background: red;
+	top: 100px;
+	left: 50px;
+}
+.chat {
+	display: block;
+	position: fixed;
+	width: 150px;
+	height: 20px;
+	border: 1px solid #ccc;
+	top: 70px;
+	left: 50px;
+}
