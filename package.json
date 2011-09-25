@@ -1,18 +1,23 @@
-{ "author": "The Barnyrd Dash Team <geoff@gosquared.com>"
-, "name": "barnyrd-dash"
-, "description": "Bet on barnyard animal races"
-, "version": "0.1.0"
-, "repository": 
-  { "type": "git"
-  , "url": "git://github.com/TheDeveloper/barnyrd-dash.git"
+{
+  "author": "The Barnyrd Dash Team <geoff@gosquared.com>",
+  "name": "barnyrd-dash",
+  "description": "Bet on barnyard animal races",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/TheDeveloper/barnyrd-dash.git"
+  },
+  "dependencies": {
+    "pusher-pipe": "0.0.x",
+    "express": "2.4.x",
+    "mongoose": "2.2.x",
+    "nano": "0.9.x",
+    "request": "2.1.x",
+    "underscore": "1.1.x"
+  },
+  "devDependencies": {},
+  "subdomain": "barnyrd-dash",
+  "scripts": {
+    "start": "server.js"
   }
-, "dependencies": 
-  { "pusher-pipe": "0.0.x"
-  , "express" : "2.4.x"
-  , "mongoose" : "2.2.x"
-  , "nano" : "0.9.x"
-  , "request": "2.1.x"
-  , "underscore": "1.1.x"
-  }
-, "devDependencies": {}
 }
