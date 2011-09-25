@@ -5,6 +5,7 @@
 	<script src="javascripts/views/play_view.js" type="text/javascript"></script>	
 	<script src="javascripts/views/screens.js" type="text/javascript"></script>	
 	<script src="javascripts/game.js" type="text/javascript"></script>
+	<script src="javascripts/namegen.js" type="text/javascript"></script>
 	<script src="javascripts/app.js" type="text/javascript"></script>
 
 	<link rel="stylesheet" href="stylesheets/master.css" type="text/css" media="screen">
@@ -14,24 +15,32 @@
 	<div class="gameArea">
 		
 	</div>
+	<div class="frame"></div>
 	</div>
 	
 	<div id="templates">
 		<img src="images/characters/characters_01_48x480.png" id="imgSprite">
 		<img src="images/shadow.png" id="shadowSprite">
-		<img src="images/track_05_600x40.png" id="trackSprite1">
-		<img src="images/track_05_600x40.png" id="trackSprite2">
 		
 		<div class="raceScreen">
+
 			<div class="sky">
 				<div class="fields"></div>
 			</div>
 			<div class="barn"></div>
-			<canvas class="raceCanvas" id="race" width="730" height="300"></canvas>
+			<canvas class="raceCanvas" id="race" width="690" height="300"></canvas>
+			<div class="labelHolder"></div>
 		</div>
 		
 		<div class="lobbyScreen">
-			<a href="#" class="startBtn">start race</a>
+			<h1>Choose your contestant</h1>
+			
+			<ul class="contestants">
+			</ul>
+			
+			<div class="clear">
+				<a href="#" class="startBtn">start race</a>
+			</div>
 		</div>
 		
 	</div>

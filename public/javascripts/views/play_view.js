@@ -1,4 +1,4 @@
-var PlayView = function(sprites){
+var PlayView = function(sprites, chosen){
 	var self = this;
 	var canvas	= document.getElementById('race');
 	var ctx			= canvas.getContext('2d');
@@ -10,28 +10,21 @@ var PlayView = function(sprites){
 	var spriteHeight = 40;
 	var spriteWidth = 40;
 	var margin = (laneHeight - spriteHeight) / 2
-	var trackSprites = []
-	for (var i=0; i < sprites.length; i++) {
-		trackSprites.push(document.getElementById('trackSprite' + Math.ceil(Math.random() * 2)))
-	};
 	ctx.clearRect(0,0, canvas.width, canvas.height);
-	
-	this.drawTracks = function(){
-		// draw tracks
-		// for (var i=0; i < trackSprites.length; i++) {
-		// 	ctx.drawImage(
-		// 		trackSprites[i], 
-		// 		10,
-		// 		laneHeight * i + 20
-		// 	);
-		// };
+	var labels = []
+	for (var i=0; i < sprites.length; i++) {
+		var el = $('<div class="label" id="l'+i+'">'+sprites[i].name+'</div>')
+		$('.labelHolder').append(el)
+		labels.push(el)
 	}
 	
 	this.render = function(frameNum){
-		ctx.clearRect(0,0, canvas.width, canvas.height)
-		self.drawTracks();
-		
+		ctx.clearRect(0,0, canvas.width, canvas.height)		
 		for (var i=0; i < sprites.length; i++) {
+			$('#l'+i).css('left', (sprites[i].position.x - 240) + 'px')
+			$('#l'+i).css('top', ((laneHeight * sprites[i].lane) + spriteHeight -2) - 20);
+			if (i == chosen)
+				$('#l'+i).css('color', 'red');
 			// draw shadow
 			ctx.drawImage(
 				shadowSprite, 

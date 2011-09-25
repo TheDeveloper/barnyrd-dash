@@ -1,20 +1,14 @@
-var Game = function(sprites){
+var Game = function(sprites, chosen){
 	var gameInterval;
 	var self = this
 	var frameNum;
-	var sprites = [];
-	var playerLength = 7;
-	for (var i=0; i < playerLength; i++) {
-		sprites.push( new Sprite(i) )
-	};
-	var playView = new PlayView(sprites);
+	var playView = new PlayView(sprites, chosen);
 	
-	var finish = function(){
-		showWin(25)
-		var btn = $('<a href="#">Play again</a>').click(function(){
-			new Game()
-		});
-		$('.notice').append(btn)
+	var finish = function(id){
+		if (id == chosen)
+			showWin(25)
+		else
+			showLose()
 		stop()
 	}
 	
@@ -29,8 +23,8 @@ var Game = function(sprites){
 			
 			for (var i=0; i < sprites.length; i++) {
 				sprites[i].onEnterFrame(frameNum);
-				if (sprites[i].position.x > 700){
-					finish();
+				if (sprites[i].position.x > 650){
+					finish(i);
 				}
 			};
 			
@@ -51,7 +45,6 @@ var Game = function(sprites){
 		}
 	}
 	
-	playView.drawTracks()
 	countDown(4)
 }
 
@@ -98,6 +91,14 @@ var showWin = function(money){
 	$('.notice').remove()
 	var el = $('<div class="notice">'+ '<img src="images/signwin_01_380x240.png" />' + '</div>')
 	$('.gameArea').append(el);
+	el.click(function(){ window.location = '/pen' })
+}
+
+var showLose = function(){
+	$('.notice').remove()
+	var el = $('<div class="notice">'+ '<img src="images/lose.png" />' + '</div>')
+	$('.gameArea').append(el);
+	el.click(function(){ window.location = '/pen' })
 }
 
 var showNotice = function(msg){

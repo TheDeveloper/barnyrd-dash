@@ -3,12 +3,15 @@
 	padding: 0;
 	margin: 0;
 }
+body {
+	background: #b6ffff;
+}
 a {
 	text-decoration: none;
 	color: #222;
 }
 .raceScreen {
-	background: #65CA39 url("../images/tracks.png") no-repeat 20 125;
+	background: #65CA39 url("../images/tracks.png") no-repeat 20px 125px;
 	height: 450px;
 }
 .notice {
@@ -41,10 +44,11 @@ a {
 	z-index: 10;
 }
 .holder {
-	width: 800px;
+	width: 760px;
 	margin: 30px auto;
-	background: #ddd;
+	background: #65CA39;
 	position: relative;
+	height: 460px;
 }
 .raceCanvas {
 	position: absolute;
@@ -61,3 +65,64 @@ a {
 .counter3 { background-position: 0 -140 }
 .counter2 { background-position: 0 -280 }
 .counter1 { background-position: 0 -420 }
+.clear{
+  clear:both;
+}
+.lobbyScreen {
+	position: absolute;
+	top: 50px;
+	left: 100px;
+	z-index: 11;
+	background: #997956;
+	padding: 10px;
+	width: 600px;
+}
+.lobbyScreen h1 {
+	text-align: center;
+	margin-bottom: 10px;
+	color: #fff;
+}
+.contestants li {
+	padding: 5px;
+	width: 130px;
+	float: left;
+	height: 100px;
+	text-align: center;
+	background: #D5A374;
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+.contestants li.selected {
+	background: yellow;
+}
+.card{
+  /*border: solid 1px #000;*/
+	margin: 0 auto;
+  width: 48px;
+  height: 48px;
+  background-repeat: no-repeat;
+	background-image: url('../images/characters/characters_01_48x480.png');
+}
+.card.animal0 { background-position: 0 0px; }
+.card.animal1 { background-position: 0 -48px; }
+.card.animal2 { background-position: 0 -96px; }
+.card.animal3 { background-position: 0 -144px; }
+.card.animal4 { background-position: 0 -192px; }
+
+.card strong{
+	padding-top: 50px;
+}
+.labelHolder {
+	position: absolute;
+	left: 70px;
+	top: 100px;
+	height: 360px;
+	width: 690px;
+	overflow: hidden;
+}
+.label {
+	position: absolute;
+	width: 200px;
+	left: -200px;
+	text-align: right;
+}

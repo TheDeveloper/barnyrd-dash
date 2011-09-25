@@ -1,10 +1,23 @@
 var express    = require('express')
   , cfg        = require('./conf/config')
+  , www        = cfg.www
   , handler    = require('./handler')
+  , betable    = require('./lib/oauth2/betable')
   , app        = express.createServer()
   , mongoose   = require('mongoose')
-  , mongo      = require('mongodb');
+  , mongo      = require('mongodb')
+  , couch      = require('./lib/couch')
   ;
+
+cfg.betable.callback = function (e,req,res,b) {
+  if(e) { res.send(e.message, 500); }
+  couch.user.first_by_betable_email(b.email, function(e,b,h){
+    if(e) { res.send('not found'); }
+    req.session.authenticated = true;
+    res.send(b);
+  });
+};
+betable(app,cfg);
 
 app.configure( function(){
   app.use(express.bodyParser());
@@ -22,6 +35,9 @@ app.get('/lobby', function(req, res){
 });
 app.get('/pen', function(req, res){
   res.sendfile('public/pen.html');
+});
+app.get('/race', function(req, res){
+  res.sendfile('public/race.html');
 });
 
 app.get('/account_info', function(req, res){
@@ -66,7 +82,7 @@ app.post('/pusher/auth', function(req, res){
   var channelData = {
     user_id: Math.floor(Math.random()*100), 
     user_info: {name: 'Mr. Pusher', animal: 'horse'}
-  }
+  };
   res.send(pusher.auth(req.param('socket_id'), req.param('channel_name'), channelData));
 });
 
