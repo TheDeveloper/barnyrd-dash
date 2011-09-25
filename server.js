@@ -88,6 +88,10 @@ app.get('/account_info', authenticated, function(req, res){
   res.send(JSON.stringify(req.session._barnyrd_user));
 });
 
+app.get('/get_my_player', function(req, res){
+    res.send(JSON.stringify({name: req.session._barnyrd_player, animal: req.session._barnyrd_animal}));
+});
+
 app.put('/create_player', function(req, res){
   var playerName = req.param('name')
     , character  = req.param('character')
