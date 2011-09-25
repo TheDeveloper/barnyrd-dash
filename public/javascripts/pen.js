@@ -144,6 +144,9 @@ function initPen(){
     }
   });
 
+	var myCreds = localStorage['creds'] || 40
+	$('.creds').text(myCreds)
+	
   function render() {
     myInfo.elm = $('#player-'+myInfo.user_id);
     var speed = 3;

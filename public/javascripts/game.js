@@ -5,10 +5,14 @@ var Game = function(sprites, chosen){
 	var playView = new PlayView(sprites, chosen);
 	
 	var finish = function(id){
-		if (id == chosen)
-			showWin(25)
-		else
+		if (id == chosen){
+			var winnings = 25
+			var myCreds = localStorage['creds'] || 40;
+			localStorage['creds'] = myCreds + winnings
+			showWin(winnings)
+		} else {
 			showLose()
+		}
 		stop()
 	}
 	
@@ -89,7 +93,7 @@ var showCounter = function(num){
 
 var showWin = function(money){
 	$('.notice').remove()
-	var el = $('<div class="notice">'+ '<img src="images/signwin_01_380x240.png" />' + '</div>')
+	var el = $('<div class="notice">'+ '<img src="images/signwin_01_380x240.png" />' + '<span class="money">'+ money+'</span>'+'</div>')
 	$('.gameArea').append(el);
 	el.click(function(){ window.location = '/pen' })
 }
