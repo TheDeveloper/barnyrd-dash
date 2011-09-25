@@ -5,7 +5,7 @@ var pusher  =
     , secret : 'e009ed4001f474071a67'
     }
   , www     =
-    { host   : 'barnyrd-dash.nodejitsu.com'
+    { host   : 'barnyrd.no.de'
     , port   : 80
     , ssl   : false
     , secret : 'f095ad69066a9e8bc312acebf84cc4e7004c6e7695389558b2177c664e1' +
