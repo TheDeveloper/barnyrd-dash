@@ -6,8 +6,17 @@ var pusher_conf
     , secret : 'e009ed4001f474071a67'
     }
   , http_conf =
-    { host: 'localhost'
-    , port: 8080
+    { host   : 'localhost'
+    , port   : 8080
+    , secret : 'f095ad69066a9e8bc312acebf84cc4e7004c6e7695389558b2177c664e1' +
+               '8b4ed490fda8665d5fca9d364597977399a1069bf88612b921f1308b45a'
+    }
+  , betable =
+    { key       : "e009ed4001f474071a67"
+    , secret    : "0458be1972bc459c659f"
+    , namespace : 'auth' 
+    , host      : 'localhost'
+    , https     : false
     }
   ;
 
@@ -21,7 +30,8 @@ try { pusher_conf = require('./pusher'); }
 catch(e) { pusher_conf = defaults; }
 
 module.exports = 
-  { pusher : pusher_conf
-  , www    : http_conf
-  , mongo    : mongo
+  { pusher  : pusher_conf
+  , www     : http_conf
+  , mongo   : mongo
+  , betable : betable
   };
