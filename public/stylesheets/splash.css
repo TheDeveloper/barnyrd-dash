@@ -39,3 +39,10 @@ div#splash-box{
 	position:relative;
 	top:1px;
 }
+
+div#plane{
+  width: 783px;
+  height: 128px;
+  background: url('/images/logoplane.png');
+  position: absolute;
+}
