@@ -98,6 +98,7 @@ app.put('/create_player', function(req, res){
     if(e) { res.send("error"); }
     req.session._barnyrd_user   = b;
     req.session._barnyrd_animal = character;
+    req.session._barnyrd_player = playerName;
     res.send(b);
   });
 });
