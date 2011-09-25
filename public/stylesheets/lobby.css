@@ -20,3 +20,57 @@ div#get-started-lightbox{
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
 }
+
+.namdde-holder{
+}
+
+.selected-card{
+  width: 48px;
+  height: 48px;
+}
+
+.animal-picker{
+  
+}
+
+.card{
+  /*border: solid 1px #000;*/
+  float:left;
+  width: 48px;
+  height: 48px;
+  margin-left: 53px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.card:hover{
+  border: solid 1px #000;
+  margin-left: 52px;
+  margin-right: -1px;
+  margin-top:-1px;
+}
+
+.card.selected{
+  border: solid 2px green;
+  margin-left: 51px;
+  margin-right: -2px;
+  margin-top: -2px;
+}
+
+.card.bull{
+  background-image: url('/images/characters/bull_01_48x48.png');
+}
+.card.horse{
+  background-image: url('/images/characters/horse_01_48x48.png');
+}
+.card.sheep{
+  background-image: url('/images/characters/sheep_01_48x48.png');
+}
+.card.cow{
+  background-image: url('/images/characters/cow_01_48x48.png');
+}
+.card.goose{
+  background-image: url('/images/characters/goose_01_48x48.png');
+}
