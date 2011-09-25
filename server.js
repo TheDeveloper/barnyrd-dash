@@ -4,6 +4,8 @@ var express    = require('express')
   , handler    = require('./handler')
   , betable    = require('./lib/oauth2/betable')
   , app        = express.createServer()
+  , mongoose   = require('mongoose')
+  , mongo      = require('mongodb')
   , couch      = require('./lib/couch')
   ;
 
@@ -59,9 +61,30 @@ app.get('/race', function(req, res){
 app.get('/account_info', function(req, res){
   var jsonRes = {};
   if(req.session && req.session.authenticated){
-    jsonRes.accountCreated = true;
+    
   }
+  var server = new mongo.Server(cfg.mongo.host, cfg.mongo.port, {});
+    var client = new mongo.Db(cfg.mongo.database, server, {native_parser: true});
+    jsonRes.accountCreated = true;
+    client.open(function(err, db){
+	if(err){
+	    console.log(err);
+	}
+	db.authenticate(cfg.mongo.username, cfg.mongo.password, function(err, success){
+	    console.log(err);
+	    db.collection('test', function(err, collection){
+		console.log(err);
+	       collection.insert({'test' : 1}); 
+	    });
+	});
+    });
   res.send(JSON.stringify(jsonRes));
+});
+
+app.post('/create_player', function(req, res){
+  var playerName = req.param('name');
+  var character = req.param('character');
+  console.log(playerName);
 });
 
 // Pusher auth

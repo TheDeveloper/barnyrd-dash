@@ -1,11 +1,14 @@
-var Game = function(sprites){
+var Game = function(sprites, chosen){
 	var gameInterval;
 	var self = this
 	var frameNum;
-	var playView = new PlayView(sprites);
+	var playView = new PlayView(sprites, chosen);
 	
-	var finish = function(){
-		showWin(25)
+	var finish = function(id){
+		if (id == chosen)
+			showWin(25)
+		else
+			showLose()
 		stop()
 	}
 	
@@ -21,7 +24,7 @@ var Game = function(sprites){
 			for (var i=0; i < sprites.length; i++) {
 				sprites[i].onEnterFrame(frameNum);
 				if (sprites[i].position.x > 650){
-					finish();
+					finish(i);
 				}
 			};
 			
@@ -87,6 +90,13 @@ var showCounter = function(num){
 var showWin = function(money){
 	$('.notice').remove()
 	var el = $('<div class="notice">'+ '<img src="images/signwin_01_380x240.png" />' + '</div>')
+	$('.gameArea').append(el);
+	el.click(function(){ window.location = '/pen' })
+}
+
+var showLose = function(){
+	$('.notice').remove()
+	var el = $('<div class="notice">'+ '<img src="images/lose.png" />' + '</div>')
 	$('.gameArea').append(el);
 	el.click(function(){ window.location = '/pen' })
 }

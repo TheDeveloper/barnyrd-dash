@@ -6,10 +6,6 @@ $().ready(function(){
 	for (var i=0; i < playerLength; i++) {
 		contestants.push( new Sprite(i) )
 	};
-	var lobbyScreen = new LobbyScreen(contestants, function(){
-		lobbyScreen.template.remove();
-		new Game(contestants)
-		return false;
-	})
+	var lobbyScreen = new LobbyScreen(contestants)
 	$('.gameArea').append( lobbyScreen.template )
 });
