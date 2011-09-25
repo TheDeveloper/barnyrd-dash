@@ -34,6 +34,7 @@ catch(e) {
     , www     : www
     , mongo   : mongo
     , betable : betable
+    , couch   : couch
     };
 }
 
