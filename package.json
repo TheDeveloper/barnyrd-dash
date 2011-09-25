@@ -2,7 +2,7 @@
   "author": "The Barnyrd Dash Team <geoff@gosquared.com>",
   "name": "barnyrd-dash",
   "description": "Bet on barnyard animal races",
-  "version": "0.1.0-1",
+  "version": "0.1.0-2",
   "repository": {
     "type": "git",
     "url": "git://github.com/TheDeveloper/barnyrd-dash.git"
@@ -19,6 +19,8 @@
   "subdomain": "barnyrd-dash",
   "scripts": {
     "start": "server.js"
+  },
+  "engines": {
+    "node": ">=0.3.6"
   }
-  , "engines"         : { "node": ">=0.3.6" }
 }
