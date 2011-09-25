@@ -5,6 +5,7 @@ function initPen(){
   var pen = $('#pen');
   var pusher = new Pusher('a553813b71932b8355e4');
   var penChan = pusher.subscribe('presence-pen');
+  var last_top;
 
   penChan.bind('pusher:damien_send_subscribe', function(channel_data) {
     console.log(channel_data)
@@ -158,14 +159,15 @@ function initPen(){
     }if (input.right){
       pos.left = pos.left + speed
       moved = true
-    }if (input.up){
+    }if (input.up && (pos.top-last_top!==48)){
       pos.top = pos.top - speed
       moved = true
-    }if (input.down){
+    }if (input.down && (pos.top-last_top!==48)){
       pos.top = pos.top + speed
       moved = true
     }
     if (moved == true) {
+      last_top = pos.top;
       penChan.trigger('client-pos', {
         user_id: myInfo.user_id,
         left: pos.left,
