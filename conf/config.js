@@ -11,8 +11,8 @@ var pusher  =
                '8b4ed490fda8665d5fca9d364597977399a1069bf88612b921f1308b45a'
     }
   , betable =
-    { key       : "123"
-    , secret    : "345"
+    { key       : "eWwnS6UtuxDmsz1g2k5TRgSNLzia2owK9bIFMJwW"
+    , secret    : "WLUvmXc6jwAG51ZPK4FAU1gaMI0JDphtFBFWSRNE"
     , namespace : 'auth' 
     , https     : false
     }
@@ -27,10 +27,17 @@ var pusher  =
     }
   ;
 
-module.exports = 
-  { pusher  : pusher
-  , www     : www
-  , mongo   : mongo
-  , betable : betable
-  , couch   : couch
-  };
+try { config = require('./pusher'); } 
+catch(e) { 
+  config = 
+    { pusher  : pusher
+    , www     : www
+    , mongo   : mongo
+    , betable : betable
+    , couch   : couch
+    };
+}
+
+config.www.url = "http:" + (config.www.ssl ? 's' : '') + 
+  "//" + config.www.host + (config.www.port ? ':' + config.www.port : '');
+module.exports = config;
