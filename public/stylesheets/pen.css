@@ -53,8 +53,7 @@
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
-	overflow: scroll;
-
+	overflow: hidden;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#eeeeee)); /* Saf4+, Chrome */
   background-image: -webkit-linear-gradient(top, #ffffff, #eeeeee); /* Chrome 10+, Saf5.1+, iOS 5+ */
   background-image:    -moz-linear-gradient(top, #ffffff, #eeeeee); /* FF3.6 */

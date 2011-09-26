@@ -55,7 +55,7 @@ cfg.betable.callback = function (e,req,res,betable_user,access_token) {
     couch.user.first_by_betable_email(betable_user.user.email, function(e,b,h){
       if(e) { 
         if (e.message === 'no_db_file') {
-          return create_user(betable_user)
+          return create_user(betable_user);
         }
         else {
           return render_err(e);
@@ -73,13 +73,13 @@ app.get('/', function(req, res) {
   }
   res.sendfile('public/splash.html');
 });
-app.get('/lobby', authenticated, function(req, res){
+app.get('/lobby', /*authenticated,*/ function(req, res){
   res.sendfile('public/lobby.html');
 });
-app.get('/pen',  authenticated, function(req, res){
+app.get('/pen',  /*authenticated,*/ function(req, res){
   res.sendfile('public/pen.html');
 });
-app.get('/race',  [authenticated, character], function(req, res){
+app.get('/race',  /*[authenticated, character],*/ function(req, res){
   res.sendfile('public/race.html');
 });
 app.get('/logout', function(req,res){
@@ -91,12 +91,13 @@ app.get('/logout', function(req,res){
   res.redirect('/');
 });
 
-app.get('/account_info', authenticated, function(req, res){
+app.get('/account_info', /*authenticated,*/ function(req, res){
+  req.session._barnyrd_user = req.session._barnyrd_user ? req.session._barnyrd_user : {accountCreated: false};
   res.send(JSON.stringify(req.session._barnyrd_user));
 });
 
 app.get('/get_my_player', function(req, res){
-    res.send(JSON.stringify({name: req.session._barnyrd_player, animal: req.session._barnyrd_animal}));
+    res.send(JSON.stringify({name: req.session._barnyrd_player, animal: (req.session._barnyrd_animal||'horse')}));
 });
 
 app.put('/create_player', function(req, res){
@@ -127,7 +128,7 @@ var pusher = new Pusher({
 app.post('/pusher/auth', function(req, res){
   var channelData = {
     user_id: Math.floor(Math.random()*100), 
-    user_info: {name: req.session._barnyrd_user, animal: req.session._barnyrd_animal}
+    user_info: {name: req.session._barnyrd_user, animal:( req.session._barnyrd_animal||'horse')}
   };
   res.send(pusher.auth(req.param('socket_id'), req.param('channel_name'), channelData));
 });
